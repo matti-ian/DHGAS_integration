@@ -34,18 +34,21 @@ class IntegratedModel(nn.Module):
             self_loop_add=config['commformer_params']['self_loop_add'],
             no_relation_enhanced=config['commformer_params']['no_relation_enhanced']
         )
+        
         #load config file
         config = box.Box.from_yaml(filename='config.yaml')
+        
         # Initialize DHGAS model
-        self.dhgas_model = load_model(config.dhgas_params, config.dataset)
+        dataset = load_data(config.dhgas_params)
+        self.dhgas_model = load_model(config.dhgas_params, dataset)
         
         
         
 
-    def forward(self, state):
+    def forward(self, data):
         # Preprocess state data using DHGAS utility
         config = box.box_from_file(file='config.yaml',file_type='yaml')
-        data = load_data(dataset= config.dhgas_params.dataset)
+        dataset = load_data(dataset= config.dhgas_params.dataset)
         # Forward pass through DHGAS model
         dhgas_output = self.dhgas_model(data)
         # Forward pass through CommFormer model with DHGAS output

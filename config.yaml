@@ -22,21 +22,35 @@ commformer_params:
   num_epochs: 100
 
 dhgas_params:
-  seed: 123
-  model: 'DHGASHLinear_ACT'
-  dhconfig: 'path_to_dhconfig'
-  n_layers: 3
+  seed: 22
+  model: 'HLinear'
+  dhconfig: 'DHGAS\dhgas\config.py'
+  n_layers: 2
   dataset: 'Ecomm'
-  predict_type: 'regression'
   n_heads: 4
-  twin: False
   device: 'cpu'
   norm: 'batch'
   in_dim: 128
   hid_dim: 256
   out_dim: 128
   num_classes: 10
+  log_dir: 'log'
+  dynamic: -1
+  homo: -1
+  twin: -1
+  test_full: -1
+  predict_type: '' 
+  max_epochs: 500
+  patience: 10
+  shuffle: 1
+  cul: 1
+  norm: 
+  hlinear_act: 'tanh'
+  n_heads: 4
+  lr: 1e-2
+  wd: 0 
+  grad_clip: 0
 
 dataset:
   metadata: 'Dataset metadata'
-  dataset: 
+  
