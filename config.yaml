@@ -1,0 +1,42 @@
+# config.yaml
+
+commformer_params:
+  state_dim: 128
+  obs_dim: 128
+  action_dim: 10
+  n_agent: 4
+  n_block: 6
+  n_embd: 256
+  n_head: 8
+  encode_state: False
+  device: "cpu"
+  action_type: "Discrete"
+  dec_actor: False
+  share_actor: False
+  sparsity: 0.4
+  warmup: 10
+  post_stable: False
+  post_ratio: 0.5
+  self_loop_add: True
+  no_relation_enhanced: False
+  num_epochs: 100
+
+dhgas_params:
+  seed: 123
+  model: 'DHGASHLinear_ACT'
+  dhconfig: 'path_to_dhconfig'
+  n_layers: 3
+  dataset: 'Ecomm'
+  predict_type: 'regression'
+  n_heads: 4
+  twin: False
+  device: 'cpu'
+  norm: 'batch'
+  in_dim: 128
+  hid_dim: 256
+  out_dim: 128
+  num_classes: 10
+
+dataset:
+  metadata: 'Dataset metadata'
+  dataset: 
