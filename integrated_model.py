@@ -9,7 +9,6 @@ import yaml
 import box
 
 
-
 class IntegratedModel(nn.Module):
     def __init__(self, config):
         super(IntegratedModel, self).__init__()
@@ -39,18 +38,18 @@ class IntegratedModel(nn.Module):
         config = box.Box.from_yaml(filename='config.yaml')
         
         # Initialize DHGAS model
-        dataset = load_data(config.dhgas_params)
-        self.dhgas_model = load_model(config.dhgas_params, dataset)
-        
-        
+        dataset = load_data(config.dhgas_params)        
+            
+        self.dhgas_model = load_model(config.dhgas_params,dataset)
+         
         
 
     def forward(self, data):
         # Preprocess state data using DHGAS utility
         config = box.box_from_file(file='config.yaml',file_type='yaml')
-        dataset = load_data(dataset= config.dhgas_params.dataset)
+        dataset = load_data(config.dhgas_params.dataset)
         # Forward pass through DHGAS model
-        dhgas_output = self.dhgas_model(data)
+        dhgas_output = self.dhgas_model(dataset)
         # Forward pass through CommFormer model with DHGAS output
         commformer_output = self.commformer_model(dhgas_output)
         return commformer_output
