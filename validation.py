@@ -19,7 +19,7 @@ with open('normalized_test_data.txt', 'r') as f:
         numbers = [float(x) for x in line.split()]
         test_data.append(numbers)
 
-test_data = torch.tensor(test_data, dtype=torch.float32)
+test_data = torch.tensor(test_data, dtype=torch.float64)
 
 # Define custom environment
 class CustomEnv(gym.Env):
@@ -29,7 +29,7 @@ class CustomEnv(gym.Env):
         self.model = model
         self.current_step = 0
         self.action_space = spaces.Discrete(2)  # Define action space, e.g., discrete actions
-        self.observation_space = spaces.Box(low=-float('inf'), high=float('inf'), shape=(4,), dtype=torch.float32)  # Define observation space
+        self.observation_space = spaces.Box(low=-float('inf'), high=float('inf'), shape=(4,), dtype=torch.float64)  # Define observation space
 
     def reset(self):
         self.current_step = 0

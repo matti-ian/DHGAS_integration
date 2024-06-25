@@ -7,7 +7,7 @@ from DHGAS.dhgas.models import load_model
 from DHGAS.dhgas.data import load_data
 import yaml
 import box
-
+from types import SimpleNamespace;
 
 class IntegratedModel(nn.Module):
     def __init__(self, config):
@@ -38,9 +38,9 @@ class IntegratedModel(nn.Module):
         config = box.Box.from_yaml(filename='config.yaml')
         
         # Initialize DHGAS model
-        dataset = load_data(config.dhgas_params)        
-            
-        self.dhgas_model = load_model(config.dhgas_params,dataset)
+        dataset, args = load_data(config.dhgas_params)       
+                           
+        self.dhgas_model = load_model(args,dataset)
          
         
 

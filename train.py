@@ -5,7 +5,7 @@ import yaml
 from stable_baselines3 import PPO
 from stable_baselines3.common.vec_env import DummyVecEnv
 from integrated_model import IntegratedModel
-from rl_env import CustomEnv
+from validation import CustomEnv
 import gym
 
 # Load configuration
@@ -22,7 +22,7 @@ with open('normalized_train_data.txt', 'r') as f:
 train_data = torch.tensor(train_data, dtype=torch.float32)
 
 # Initialize environment and model
-env = DummyVecEnv([lambda: CustomEnv(train_data, IntegratedModel(config))])
+env = DummyVecEnv([lambda:CustomEnv(train_data, IntegratedModel(config))])
 model = PPO("MlpPolicy", env, verbose=1)
 
 # Train the model

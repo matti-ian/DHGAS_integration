@@ -1,25 +1,31 @@
+# rl_env.py
 import gym
 from gym import spaces
 import numpy as np
 
 class CustomEnv(gym.Env):
-    def __init__(self):
+    def __init__(self, train_data):
         super(CustomEnv, self).__init__()
-        # Define action and observation space
-        self.action_space = spaces.Discrete(2)  # Example: 2 discrete actions
-        self.observation_space = spaces.Box(low=0, high=1, shape=(10,), dtype=np.float32)  # Example: 10-dimensional observation
+        self.train_data = train_data
+        self.current_step = 0
+        self.observation_space = spaces.Box(low=np.min(train_data), high=np.max(train_data), shape=(4,), dtype=np.float32)
+        self.action_space = spaces.Discrete(2)
 
     def reset(self):
-        # Reset the state of the environment to an initial state
-        self.state = np.random.rand(10)
-        return self.state
+        self.current_step = 0
+        return self.train_data[self.current_step]
 
     def step(self, action):
-        # Execute one time step within the environment
-        reward = 1.0 if action == 1 else 0.0  # Example: Reward logic
-        done = np.random.rand() > 0.95  # Example: Episode ends randomly
-        self.state = np.random.rand(10)
-        return self.state, reward, done, {}
+        self.current_step += 1
+        if self.current_step >= len(self.train_data):
+            done = True
+            reward = 0
+            obs = np.zeros(4)
+        else:
+            done = False
+            reward = 1  # Example reward
+            obs = self.train_data[self.current_step]
+        return obs, reward, done, {}
 
     def render(self, mode='human'):
         pass
