@@ -17,3 +17,8 @@ REM python -m site --user-site  user_python_path.txt
 cd integration\Lib\site-packages
 echo ..\DHGAS\dhgas > dhgas.pth
 echo ..\CommFormer\commfommer > CommFormer.pth
+
+cd ..
+cd ..
+cd ..
+python normalize.py

@@ -7,11 +7,11 @@ def normalize_data(df):
     return (df - df.min()) / (df.max() - df.min())
 
 # Load training data from text file
-train_data_path = 'ecomm_edge_train.txt'
+train_data_path = 'DHGAS\\data\\ecomm\\ecomm_edge_train.txt'
 train_data = pd.read_csv(train_data_path, sep='\t', header=None)
 
 # Load test data from text file
-test_data_path = 'ecomm_edge_val_lr_train_test.txt'
+test_data_path = 'DHGAS\\data\\ecomm\\ecomm_edge_val_lr_train_test.txt'
 test_data = pd.read_csv(test_data_path, sep='\t', header=None)
 
 # Normalize training data
