@@ -46,8 +46,9 @@ class IntegratedModel(nn.Module):
 
     def forward(self, data):
         # Preprocess state data using DHGAS utility
-        config = box.box_from_file(file='config.yaml',file_type='yaml')
-        dataset = load_data(config.dhgas_params.dataset)
+        config = box.Box.from_yaml(filename='config.yaml')
+        dataset, args = load_data(config.dhgas_params)
+        dataset = load_data(config.dhgas_params)
         # Forward pass through DHGAS model
         dhgas_output = self.dhgas_model(dataset)
         # Forward pass through CommFormer model with DHGAS output

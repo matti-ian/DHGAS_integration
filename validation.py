@@ -7,6 +7,7 @@ from stable_baselines3.common.vec_env import DummyVecEnv
 from integrated_model import IntegratedModel
 import gym
 from gym import spaces
+import numpy as np
 
 # Load configuration
 with open('config.yaml', 'r') as file:
@@ -29,7 +30,7 @@ class CustomEnv(gym.Env):
         self.model = model
         self.current_step = 0
         self.action_space = spaces.Discrete(2)  # Define action space, e.g., discrete actions
-        self.observation_space = spaces.Box(low=-float('inf'), high=float('inf'), shape=(4,), dtype=torch.float64)  # Define observation space
+        self.observation_space = spaces.Box(low=-float('inf'), high=float('inf'), shape=(4,), dtype=np.float64)  # Define observation space
 
     def reset(self):
         self.current_step = 0
