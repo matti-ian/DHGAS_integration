@@ -1,0 +1,56 @@
+# config.yaml
+
+commformer_params:
+  state_dim: 128
+  obs_dim: 128
+  action_dim: 10
+  n_agent: 4
+  n_block: 6
+  n_embd: 256
+  n_head: 8
+  encode_state: False
+  device: "cpu"
+  action_type: "Discrete"
+  dec_actor: False
+  share_actor: False
+  sparsity: 0.4
+  warmup: 10
+  post_stable: False
+  post_ratio: 0.5
+  self_loop_add: True
+  no_relation_enhanced: False
+  num_epochs: 100
+
+dhgas_params:
+  seed: 22
+  model: 'HLinear'
+  dhconfig: 'DHGAS\dhgas\config.py'
+  n_layers: 2
+  dataset: 'Ecomm'
+  n_heads: 4
+  device: 'cpu'
+  norm: 'batch'
+  in_dim: 128
+  hid_dim: 256
+  out_dim: 128
+  num_classes: 10
+  log_dir: 'log'
+  dynamic: -1
+  homo: -1
+  twin: -1
+  test_full: -1
+  predict_type: '' 
+  max_epochs: 500
+  patience: 10
+  shuffle: 1
+  cul: 1
+  norm: 
+  hlinear_act: 'tanh'
+  n_heads: 4
+  lr: 1e-2
+  wd: 0 
+  grad_clip: 0
+
+dataset:
+  metadata: 'Dataset metadata'
+  
