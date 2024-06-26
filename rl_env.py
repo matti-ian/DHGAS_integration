@@ -1,25 +1,40 @@
 import gym
 from gym import spaces
 import numpy as np
+import torch
 
 class CustomEnv(gym.Env):
-    def __init__(self):
+    def __init__(self, data, model):
         super(CustomEnv, self).__init__()
+        self.data = data
+        self.model = model
+        self.current_step = 0
+
         # Define action and observation space
-        self.action_space = spaces.Discrete(2)  # Example: 2 discrete actions
-        self.observation_space = spaces.Box(low=0, high=1, shape=(10,), dtype=np.float32)  # Example: 10-dimensional observation
+        # Example: a 4-dimensional continuous observation space
+        self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(4,), dtype=np.float32)
+
+        # Example: a discrete action space of size 2
+        self.action_space = spaces.Discrete(2)
 
     def reset(self):
-        # Reset the state of the environment to an initial state
-        self.state = np.random.rand(10)
-        return self.state
+        self.current_step = 0
+        return self.data[self.current_step]
 
     def step(self, action):
-        # Execute one time step within the environment
-        reward = 1.0 if action == 1 else 0.0  # Example: Reward logic
-        done = np.random.rand() > 0.95  # Example: Episode ends randomly
-        self.state = np.random.rand(10)
-        return self.state, reward, done, {}
+        self.current_step += 1
+        done = self.current_step >= len(self.data)
+        reward = 1 if not done else 0
+        obs = self.data[self.current_step] if not done else np.zeros(4)
+        
+        # Forward pass through the model
+        model_output = self.model(torch.tensor(obs, dtype=torch.float32))
+        
+        
+        # Example: derive reward or any other information from model output if necessary
+        # Adjust the reward based on model output if needed
+
+        return obs, reward, done, {}
 
     def render(self, mode='human'):
         pass

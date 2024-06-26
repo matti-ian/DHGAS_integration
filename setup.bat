@@ -25,6 +25,8 @@ cd ..
 
 REM copy data folder
 robocopy "DHGAS data\ecomm" "DHGAS\data\ecomm"
+robocopy "DHGAS\logs\Ecomm\archs\0\config" "DHGAS\data\ecomm"
+robocopy "DHGAS\logs\Ecomm\archs\0\supernet.json" "DHGAS\data\ecomm"
 
 REM activate virtual environment
 integration/Scripts/activate
