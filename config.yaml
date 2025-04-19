@@ -23,8 +23,8 @@ commformer_params:
 
 dhgas_params:
   seed: 22
-  model: 'HLinear'
-  dhconfig: 'DHGAS\dhgas\config.py'
+  model: 'DHSpace'
+  dhconfig: 'DHGAS\data'
   n_layers: 2
   dataset: 'Ecomm'
   n_heads: 4

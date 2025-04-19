@@ -7,7 +7,7 @@ from DHGAS.dhgas.models import load_model
 from DHGAS.dhgas.data import load_data
 import yaml
 import box
-
+from types import SimpleNamespace;
 
 class IntegratedModel(nn.Module):
     def __init__(self, config):
@@ -38,16 +38,17 @@ class IntegratedModel(nn.Module):
         config = box.Box.from_yaml(filename='config.yaml')
         
         # Initialize DHGAS model
-        dataset = load_data(config.dhgas_params)        
-            
-        self.dhgas_model = load_model(config.dhgas_params,dataset)
+        dataset, args = load_data(config.dhgas_params)       
+                           
+        self.dhgas_model = load_model(args,dataset)
          
         
 
     def forward(self, data):
         # Preprocess state data using DHGAS utility
-        config = box.box_from_file(file='config.yaml',file_type='yaml')
-        dataset = load_data(config.dhgas_params.dataset)
+        config = box.Box.from_yaml(filename='config.yaml')
+        dataset, args = load_data(config.dhgas_params)
+        dataset = load_data(config.dhgas_params)
         # Forward pass through DHGAS model
         dhgas_output = self.dhgas_model(dataset)
         # Forward pass through CommFormer model with DHGAS output
